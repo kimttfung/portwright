@@ -1,0 +1,55 @@
+diff --git a/.github/workflows/test-build.yml b/.github/workflows/test-build.yml
+index ba9cfe4..b6e58ba 100644
+--- a/.github/workflows/test-build.yml
++++ b/.github/workflows/test-build.yml
+@@ -18,6 +18,10 @@ on:
+         description: 'Build ARM packages'
+         type: boolean
+         default: false
++      build_windows_arm:
++        description: 'Build native Windows ARM64 ZIP'
++        type: boolean
++        default: false
+       build_normal:
+         description: 'Build normal packages (Windows/macOS/Linux)'
+         type: boolean
+@@ -110,3 +114,39 @@ jobs:
+         name: stretchly-arm-${{ github.run_id }}
+         path: dist/*.*
+         retention-days: ${{ env.RETENTION_DAYS }}
++
++  windows-arm:
++    if: github.event.inputs.build_windows_arm == 'true'
++    runs-on: windows-11-arm
++    steps:
++    - name: Checkout
++      uses: actions/checkout@v6
++      with:
++        ref: ${{ github.event.inputs.pr_number && format('refs/pull/{0}/head', github.event.inputs.pr_number) || github.ref }}
++    - name: Setup Python
++      uses: actions/setup-python@v6
++      with:
++        python-version: '3.12'
++    - name: Setup Node.js
++      uses: actions/setup-node@v6
++      with:
++        node-version-file: '.nvmrc'
++    - name: Install locked dependencies without scripts
++      run: npm ci --ignore-scripts --no-audit --no-fund
++    - name: Rebuild native dependencies for Electron ARM64
++      run: node_modules/.bin/electron-builder install-app-deps --platform win32 --arch arm64
++      env:
++        npm_config_jobs: 2
++    - name: Build unpacked Windows ARM64 application
++      run: node_modules/.bin/electron-builder build --win --arm64 --dir --publish=never --config.npmRebuild=false
++      env:
++        CSC_IDENTITY_AUTO_DISCOVERY: 'false'
++    - name: Create Windows ARM64 ZIP
++      shell: pwsh
++      run: Compress-Archive -Path dist\win-arm64-unpacked -DestinationPath dist\stretchly-windows-arm64.zip
++    - name: Upload native Windows ARM64 ZIP
++      uses: actions/upload-artifact@v6
++      with:
++        name: stretchly-windows-arm64-native-${{ github.run_id }}
++        path: dist/stretchly-windows-arm64.zip
++        retention-days: ${{ env.RETENTION_DAYS }}

@@ -1,0 +1,45 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/hovancik/stretchly",
+  "revision": "d150ac4c97da1ce20f4858389fc6790db52a6402",
+  "route": "packaging-release-repair",
+  "completion": "IMPLEMENTED",
+  "artifact": {
+    "type": "ZIP of the native unpacked application",
+    "entries": 218,
+    "bytes": 212452468,
+    "sha256": "cb0bcb729319a2bb3b77534bc34d31bb8dcf28f182b2363c214076e910b2cc00"
+  },
+  "native_files": {
+    "Stretchly.exe": "907a94452114142cf83d913f681878378f25674602805e259e61b36c3fa169bd",
+    "desktopIdle.node": "65037278d12a5a463ae36037df19e28694f4d66f961ca545101d5ec02bace830",
+    "focusassist.node": "133a082c4a36fdb848cb188e9a21e207f262727967f3a6ae7e1760148f0c7cc3"
+  },
+  "portwright_validation": {
+    "run_id": "stretchly-portwright-shortpath-20260921",
+    "engineer_result": "passed",
+    "manifest_sha256": "616ab7d7f386526bb123b6c55bbb0895c3e7201c035ed8c1e1e38cf6ff7cd83a",
+    "examiner_result": "passed",
+    "required_checks": [
+      "architecture",
+      "components",
+      "launch",
+      "user_task",
+      "regression",
+      "cleanup"
+    ]
+  },
+  "source_patch_sha256": "522a5de03a76abaa02cb7c6c95b0de58d33af888d4d1b5a9641580cf7105ba64",
+  "verified_claims": [
+    "The application and two packaged native addons were Arm64.",
+    "Both addons loaded under Electron 43.4.0.",
+    "Fresh-profile onboarding and a tray-triggered Mini break completed from the staged application.",
+    "The detached verification produced no fatal dialog, EPIPE, or unhandled error, and the tray and Preferences remained responsive.",
+    "A short idle reset check and nine targeted tests passed.",
+    "Every process created by the checks was closed."
+  ],
+  "limitations": [
+    "Hosted CI was not run.",
+    "No signed installer, publication, Focus Assist transition, long-duration scheduling, performance, battery, or upstream-acceptance result."
+  ]
+}

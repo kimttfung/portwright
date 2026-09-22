@@ -1,0 +1,58 @@
+diff --git a/.github/workflows/deploy.yml b/.github/workflows/deploy.yml
+index a749e6f..5f51a9d 100644
+--- a/.github/workflows/deploy.yml
++++ b/.github/workflows/deploy.yml
+@@ -38,6 +38,7 @@ jobs:
+           - aarch64-unknown-linux-gnu
+           - aarch64-unknown-linux-musl
+           - x86_64-pc-windows-msvc
++          - aarch64-pc-windows-msvc
+           - i686-pc-windows-msvc
+           - x86_64-apple-darwin
+           - aarch64-apple-darwin
+diff --git a/.github/workflows/oxipng.yml b/.github/workflows/oxipng.yml
+index 3852852..cecf9d6 100644
+--- a/.github/workflows/oxipng.yml
++++ b/.github/workflows/oxipng.yml
+@@ -38,6 +38,7 @@ jobs:
+           - aarch64-unknown-linux-gnu
+           - aarch64-unknown-linux-musl
+           - x86_64-pc-windows-msvc
++          - aarch64-pc-windows-msvc
+           - i686-pc-windows-msvc
+           - x86_64-apple-darwin
+           - aarch64-apple-darwin
+@@ -57,6 +58,8 @@ jobs:
+             target-apt-arch: arm64
+           - target: x86_64-pc-windows-msvc
+             os: windows-latest
++          - target: aarch64-pc-windows-msvc
++            os: windows-11-arm
+           - target: i686-pc-windows-msvc
+             os: windows-latest
+           - target: x86_64-apple-darwin
+diff --git a/src/main.rs b/src/main.rs
+index 5c07f45..42593fe 100644
+--- a/src/main.rs
++++ b/src/main.rs
+@@ -228,10 +228,16 @@ fn collect_files(
+ 
+ #[cfg(windows)]
+ fn apply_glob_pattern(path: PathBuf) -> Vec<PathBuf> {
+-    let matches = path
+-        .to_str()
+-        // Use MatchOptions::default() to disable case-sensitivity
+-        .and_then(|pattern| glob::glob_with(pattern, glob::MatchOptions::default()).ok())
++    let Some(pattern) = path.to_str() else {
++        return vec![path];
++    };
++    if !pattern.chars().any(|c| matches!(c, '*' | '?' | '[')) {
++        return vec![path];
++    }
++
++    // Use MatchOptions::default() to disable case-sensitivity
++    let matches = glob::glob_with(pattern, glob::MatchOptions::default())
++        .ok()
+         .map(|paths| paths.flatten().collect::<Vec<_>>());
+ 
+     match matches {

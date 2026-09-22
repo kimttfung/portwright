@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/sabrogden/Ditto",
+  "revision": "0280e7076161a1f59bd515b6f08653e4321cb05e",
+  "route": "native-arm64-with-dependency-remediation",
+  "completion": "IMPLEMENTED",
+  "artifact": {
+    "type": "portable ZIP",
+    "sha256": "82cd279c8d10da6e6739087fd69c27b95e22e40e740014f8aa807dbb612a5b37"
+  },
+  "main_executable": {
+    "machine": "ARM64",
+    "sha256": "81423faa732914c9416ef12adff6c5f3bc2c31c48eea506b2522d9017b319abe"
+  },
+  "source_patch_sha256": "30889a038421ccbe0e9f76d07cd335ee41d61cd4da004f2666c790308488603e",
+  "portwright_validation": {
+    "run_id": "ditto-first-pass",
+    "contract": "earlier Portwright verification record",
+    "manifest_sha256": "beb39edff2ffb8ed43d76ccfdfba29bd7085ce081cae1928f0481c67cbf91faa",
+    "examiner_result": "passed",
+    "required_checks": [
+      "architecture",
+      "components",
+      "portable_isolation",
+      "launch",
+      "clipboard_task",
+      "regression_error_path",
+      "cleanup"
+    ]
+  },
+  "dependency": {
+    "name": "zlib",
+    "version": "1.2.13",
+    "commit": "04f42ceca40f73e2978b50e93806c2a18c1281fc",
+    "library_machine": "ARM64",
+    "library_sha256": "de23d5e0ccb60abaa15f85caeaf8b57224994835a0e5436c80712360eb43cea8"
+  },
+  "verified_claims": [
+    "Existing Arm64 configurations were preserved.",
+    "Missing Arm64 per-file precompiled-header metadata was repaired.",
+    "The matching official zlib source was built and linked for Arm64.",
+    "The staged application completed an isolated synthetic Unicode clipboard task with an exact code-point match."
+  ],
+  "limitations": [
+    "Not a clean-machine test.",
+    "No production installer, signing, publication, performance, battery, or upstream-acceptance result.",
+    "One optional helper's architecture was checked, but its stable-process runtime loading was not demonstrated."
+  ]
+}

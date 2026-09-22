@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "display_name": "Sample application",
+  "role": "primary",
+  "repository": "https://github.com/example/sample",
+  "revision": "replace-with-pinned-revision",
+  "route": "packaging-release-repair",
+  "completion": "IMPLEMENTED",
+  "verified_claims": [
+    "The native Windows Arm package was built.",
+    "The application completed its approved task."
+  ],
+  "limitations": [
+    "Hosted CI and publication were not tested."
+  ]
+}

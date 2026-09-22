@@ -1,0 +1,22 @@
+.venv/
+portwright.egg-info/
+__pycache__/
+*.py[cod]
+tests/.tmp/
+
+# Generated target checkouts and run evidence.
+apps/
+runs/
+
+# Generated run recipes.
+recipes/*.json
+
+# Local caches and editor/tool artifacts.
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+build/
+dist/
+*.log

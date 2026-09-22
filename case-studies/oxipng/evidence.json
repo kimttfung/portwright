@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "repository": "https://github.com/oxipng/oxipng",
+  "revision": "36f3ef8aac65ecf1761739ea2f2e530281f1312b",
+  "route": "packaging-release-repair",
+  "completion": "IMPLEMENTED",
+  "artifact": {
+    "type": "native executable",
+    "machine": "ARM64",
+    "sha256": "2c4ac6ae9da8e3c5aabc0978c88d618881f69d47dedab56ef62d8d7bfb7d43f6"
+  },
+  "portwright_validation": {
+    "run_id": "oxipng-portwright-20260921",
+    "engineer_result": "passed",
+    "staged_zip_sha256": "208a4acc84515cc899ce5f66940b32d471b4281c023ec69eb4ef525954069773",
+    "examiner_result": "passed",
+    "required_checks": [
+      "architecture",
+      "components",
+      "launch",
+      "user_task",
+      "regression",
+      "cleanup"
+    ]
+  },
+  "source_patch_sha256": "76523653479d7ebba1baed691e14bd93feece4274fd3dcb8df055a8160c375be",
+  "original_frozen_patch_sha256": "3860a85b007aa537ba72c1d3f682d60e16230dd01b6bd15a81c78510533f231c",
+  "verified_claims": [
+    "The locked native Arm64 release build passed.",
+    "All 296 tests passed with none skipped after the Windows literal-path correction.",
+    "Two PNG checks preserved their inputs and matched decoded pixels.",
+    "Windows Arm64 was added to the CI and release matrices."
+  ],
+  "limitations": [
+    "Hosted CI was not run.",
+    "No release was published.",
+    "No broad format, performance, battery, or upstream-acceptance claim."
+  ]
+}

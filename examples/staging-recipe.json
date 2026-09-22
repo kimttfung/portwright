@@ -1,0 +1,36 @@
+{
+  "schema_version": 2,
+  "run_id": "sample-arm64-run",
+  "approval_id": "staging-and-verification",
+  "attempt": "attempt-01",
+  "stage_root": "runs\\sample-arm64-run\\staging\\attempt-01",
+  "folder_name": "sample-arm64",
+  "zip_name": "sample-windows-arm64.zip",
+  "files": [
+    {
+      "source": "artifacts\\sample.exe",
+      "destination": "sample.exe",
+      "role": "main",
+      "sha256": "replace-with-actual-sha256",
+      "machine": "ARM64"
+    },
+    {
+      "source": "LICENSE",
+      "destination": "LICENSE",
+      "role": "notice",
+      "sha256": "replace-with-actual-sha256"
+    }
+  ],
+  "verification": {
+    "required_checks": [
+      "architecture",
+      "components",
+      "launch",
+      "user_task",
+      "regression",
+      "cleanup"
+    ],
+    "allow_launch": true,
+    "task": "Launch the staged application and complete the task defined in the migration brief."
+  }
+}
