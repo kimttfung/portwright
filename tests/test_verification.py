@@ -108,9 +108,10 @@ class VerificationTests(unittest.TestCase):
         record = json.loads(self.run.read_text(encoding="utf-8"))
         record["staging"] = {
             "manifest": str(
-                Path(manifest["folder"]).parent.joinpath("staging-manifest.json").relative_to(
-                    self.workspace
-                )
+                Path(manifest["folder"])
+                .parent.joinpath("staging-manifest.json")
+                .resolve()
+                .relative_to(self.workspace.resolve())
             ),
             "verification_root": str(
                 (self.workspace / "runs\\fixture-run\\verification\\attempt-01").resolve()
