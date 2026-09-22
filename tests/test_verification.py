@@ -172,7 +172,7 @@ class VerificationTests(unittest.TestCase):
         self.run.write_text(json.dumps(record), encoding="utf-8")
         try:
             verified = verify(self.workspace, "fixture-run")
-            self.assertEqual(verified["verification"]["manifest"], str(external_manifest))
+            self.assertEqual(verified["verification"]["manifest"], str(external_manifest.resolve()))
         finally:
             external_manifest.unlink(missing_ok=True)
             external.rmdir()
